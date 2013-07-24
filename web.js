@@ -7,6 +7,15 @@ app.use(express.static(__dirname + '/public'));
 var f = fs.readFileSync('index.html', 'utf-8');
 var fb = new Buffer(f, 'utf-8');
 
+fs.watchFile('index.html', function (curr, prev) {
+  console.log('the current mtime is: ' + curr.mtime);
+  console.log('the previous mtime was: ' + prev.mtime);
+  var f = fs.readFileSync('index.html', 'utf-8');
+  fb = new Buffer(f, 'utf-8');
+});
+
+
+
 
 app.get('/', function(request, response) {
   response.send(fb.toString());
