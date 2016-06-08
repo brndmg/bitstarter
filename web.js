@@ -1,5 +1,5 @@
 var express = require('express');
-var fs = require('fs'); 
+var fs = require('fs');
 var app = express();
 app.use(express.logger());
 app.use(express.static(__dirname + '/public'));
@@ -13,9 +13,6 @@ fs.watchFile('index.html', function (curr, prev) {
   var f = fs.readFileSync('index.html', 'utf-8');
   fb = new Buffer(f, 'utf-8');
 });
-
-
-
 
 app.get('/', function(request, response) {
   response.send(fb.toString());
